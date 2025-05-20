@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 from gen_page import generate_pages_recursively
 
 def get_root():
@@ -31,10 +32,13 @@ def copy_recursive(src, dest):
         else:
             copy_recursive(src_path, dest_path)
         
-
 def main():
-    copy_static("static", "public")
-    generate_pages_recursively("content", "template.html", "public")
+    base_path = "/"
+    if len(sys.argv) > 1:
+        base_path = sys.argv[1]
+            
+    copy_static("static", "docs")
+    generate_pages_recursively("content", "template.html", "docs", base_path)
 
 
 if __name__ == "__main__":
