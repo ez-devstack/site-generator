@@ -1,6 +1,6 @@
 import os
 import shutil
-from gen_page import generate_page
+from gen_page import generate_pages_recursively
 
 def get_root():
     return os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -34,7 +34,7 @@ def copy_recursive(src, dest):
 
 def main():
     copy_static("static", "public")
-    generate_page("content/index.md", "template.html", "public/index.html")
+    generate_pages_recursively("content", "template.html", "public")
 
 
 if __name__ == "__main__":
